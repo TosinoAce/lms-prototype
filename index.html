@@ -26,6 +26,7 @@
     --blue-tint:#E9F6FD;
     --yellow-pastel:#FFEDA6;
     --yellow-tint:#FFF9E1;
+    --lavender-tint:#EEE9FB;
     --sidebar-bg:#15161C;
     --sidebar-bg-soft:#212330;
     --sidebar-text:#9498A3;
@@ -66,17 +67,17 @@
     display:flex;align-items:center;justify-content:center;color:#fff;
     font-family:var(--serif);font-size:15px;font-weight:800;
   }
-  .brand-name{font-family:var(--serif);font-size:18px;font-weight:800;letter-spacing:0.1px;}
-  .brand-sub{font-size:11px;color:var(--ink-soft);margin-top:1px;}
+  .brand-name{font-family:var(--serif);font-size:18px;font-weight:800;letter-spacing:0.1px;white-space:nowrap;}
+  .brand-sub{font-size:11px;color:var(--ink-soft);margin-top:1px;white-space:nowrap;}
   .topbar-right{display:flex;align-items:center;gap:14px;font-size:13.5px;color:var(--ink-soft);}
   .pill{
-    display:inline-flex;align-items:center;gap:7px;
+    display:inline-flex;align-items:center;gap:7px;white-space:nowrap;
     font-size:12.5px;color:var(--ink-soft);font-weight:500;
   }
   .pill::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;}
   .btn{
     padding:13px 22px;border-radius:var(--radius-pill);border:1.5px solid var(--ink);
-    background:var(--ink);color:var(--paper-raised);font-size:13.5px;font-weight:600;
+    background:var(--ink);color:var(--paper-raised);font-size:13.5px;font-weight:600;white-space:nowrap;
     transition:transform 140ms var(--ease-out), background 160ms ease, border-color 160ms ease, color 160ms ease, box-shadow 160ms ease;
   }
   .btn:hover{box-shadow:var(--shadow-sm);}
@@ -116,7 +117,7 @@
   /* ---------- Generic dashboard shell ---------- */
   .shell{display:flex;align-items:flex-start;min-height:calc(100vh - 68px);}
   .sidebar{
-    width:230px;flex-shrink:0;background:var(--sidebar-bg);
+    width:266px;flex-shrink:0;background:var(--sidebar-bg);
     padding:26px 16px;display:flex;flex-direction:column;gap:2px;
     box-shadow:2px 0 12px rgba(0,0,0,.06);
     position:sticky;top:0;height:100vh;overflow-y:auto;z-index:1;
@@ -125,6 +126,7 @@
   .nav-item{
     padding:13px 16px;font-size:14px;color:var(--sidebar-text);border-left:none;border-radius:var(--radius-pill);
     display:flex;align-items:center;justify-content:space-between;cursor:pointer;margin-bottom:4px;
+    white-space:nowrap;
     transition:background 140ms var(--ease-out), color 140ms var(--ease-out);
   }
   .nav-item:hover{color:#fff;background:var(--sidebar-bg-soft);}
@@ -132,16 +134,18 @@
   .nav-item.active:hover{background:var(--gold);color:#fff;}
   .nav-count{font-size:11.5px;color:var(--sidebar-text);opacity:1;font-weight:700;font-variant-numeric:tabular-nums;}
   .nav-item.active .nav-count{color:#fff;}
-  .content{flex:1;padding:40px 44px;max-width:1080px;}
+  .content{flex:1;padding:40px 44px;max-width:1180px;}
   .content h2{font-family:var(--serif);font-size:27px;font-weight:800;margin:0 0 6px;letter-spacing:-0.3px;}
   .content .subtitle{color:var(--ink-soft);font-size:14px;margin:0 0 32px;}
 
   /* ---------- KPI row ---------- */
   .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;background:transparent;border:none;margin-bottom:38px;}
+  .kpi-row-5{grid-template-columns:repeat(5,1fr);}
   .kpi{background:var(--gold-tint);padding:20px 20px;border-radius:18px;box-shadow:var(--shadow-sm);}
   .kpi:nth-child(2){background:var(--peach-tint);}
   .kpi:nth-child(3){background:var(--blue-tint);}
   .kpi:nth-child(4){background:var(--yellow-tint);}
+  .kpi:nth-child(5){background:var(--lavender-tint);}
   .kpi-value{font-family:var(--serif);font-size:28px;font-weight:800;}
   .kpi-label{font-size:12.5px;color:var(--ink-soft);margin-top:4px;}
 
@@ -158,7 +162,7 @@
   .table-wrap{background:var(--paper-raised);border:1px solid var(--line);margin-bottom:36px;border-radius:18px;overflow:hidden;box-shadow:var(--shadow-sm);}
   .table-wrap table{border-radius:0;}
 
-  .badge{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:var(--ink);}
+  .badge{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:var(--ink);white-space:nowrap;}
   .badge::before{content:'';width:7px;height:7px;border-radius:50%;flex-shrink:0;background:currentColor;}
   .badge.pending{color:#9A5B12;}
   .badge.approved,.badge.active,.badge.published,.badge.completed{color:var(--gold-deep);}
@@ -204,6 +208,14 @@
   }
   .module-row:last-child{border-bottom:none;}
   .module-row.locked{opacity:.5;}
+  .reorder-col{display:flex;flex-direction:column;gap:2px;flex-shrink:0;}
+  .reorder-btn{
+    width:22px;height:18px;border:1px solid var(--line);background:var(--paper-raised);color:var(--ink-soft);
+    font-size:9px;border-radius:5px;padding:0;cursor:pointer;display:flex;align-items:center;justify-content:center;
+    transition:background 140ms var(--ease-out), color 140ms var(--ease-out);
+  }
+  .reorder-btn:hover:not(:disabled){background:var(--gold-tint);color:var(--gold-deep);border-color:var(--gold-deep);}
+  .reorder-btn:disabled{opacity:.3;cursor:not-allowed;}
   .module-num{
     width:32px;height:32px;border-radius:50%;border:1.5px solid var(--ink);display:flex;
     align-items:center;justify-content:center;font-size:13px;font-family:var(--serif);font-weight:700;flex-shrink:0;
@@ -349,7 +361,7 @@
   .dropzone.has-file{border-style:solid;border-color:var(--sage);background:var(--sage-tint);color:var(--sage);}
   .status-toggle{display:flex;border:1.5px solid var(--line);border-radius:var(--radius-pill);overflow:hidden;width:fit-content;}
   .status-toggle button{
-    padding:11px 18px;font-size:13px;border:none;background:var(--paper-raised);color:var(--ink-soft);
+    padding:11px 18px;font-size:13px;border:none;background:var(--paper-raised);color:var(--ink-soft);white-space:nowrap;
     transition:background 140ms var(--ease-out), color 140ms var(--ease-out);
   }
   .status-toggle button.active{background:var(--ink);color:#fff;}
@@ -457,6 +469,7 @@
 
   @media(max-width:900px){
     .content{ max-width:100%; }
+    .kpi-row-5{grid-template-columns:repeat(3,1fr);}
   }
 
   @media(max-width:760px){
@@ -467,6 +480,7 @@
     .content{padding:22px 18px;}
     .entry-grid{grid-template-columns:1fr;}
     .kpi-row{grid-template-columns:1fr 1fr;}
+    .kpi-row-5{grid-template-columns:1fr 1fr;}
     .profile-card{flex-direction:column;align-items:flex-start;gap:14px;}
     .form-grid-2{grid-template-columns:1fr;}
     .topbar{padding:14px 18px;}
@@ -482,6 +496,7 @@
 
   @media(max-width:480px){
     .kpi-row{grid-template-columns:1fr 1fr;gap:10px;}
+    .kpi-row-5{grid-template-columns:1fr 1fr;gap:10px;}
     .kpi{padding:14px 14px;}
     .kpi-value{font-size:23px;}
     .landing{padding-top:56px;padding-bottom:40px;}
@@ -602,6 +617,11 @@ const state = {
   reportCourseFilter: 'all',
   videoLoading: false,
   completionModal: null,
+  quizOrder: null,
+  showQuizReview: false,
+  registerDraft: null,
+  editingStudentDetails: false,
+  studentEditDraft: null,
   // student progress: { moduleId: {watched:bool, completed:bool, bestScore:num} }
   progress:{
     m1:{watched:true, completed:true, bestScore:86},
@@ -654,6 +674,10 @@ function animateKpiCounts(){
 }
 
 function go(view, extra={}){
+  if(view !== 'adminStudentDetail'){
+    state.editingStudentDetails = false;
+    state.studentEditDraft = null;
+  }
   Object.assign(state, {view}, extra);
   render();
   window.scrollTo(0,0);
@@ -753,9 +777,14 @@ function formatPrice(n){
 /* ---------- Student self-enrollment (Explore Courses) ---------- */
 function enrollInCourse(courseId){
   const course = COURSES.find(c=>c.id===courseId);
-  const arr = state.assignments[DEMO_STUDENT_ID] = state.assignments[DEMO_STUDENT_ID] || [];
-  if(!arr.includes(courseId)) arr.push(courseId);
-  toast(`Enrolled in "${course.title}" — ${formatPrice(course.price)} charged (mock)`);
+  const alreadyRequested = state.registrations.find(r=>r.existingStudentId===DEMO_STUDENT_ID && r.interest===courseId && r.status==='pending');
+  if(alreadyRequested){ toast('You already have a pending request for this course'); return; }
+  state.registrations.unshift({
+    id:'r'+Date.now(), name:DEMO_STUDENT_NAME, email:'demo.student@example.com', phone:'—',
+    interest:courseId, status:'pending', date:new Date().toISOString().slice(0,10),
+    existingStudentId:DEMO_STUDENT_ID
+  });
+  toast(`Request sent for "${course.title}" — pending admin approval`);
   render();
 }
 
@@ -809,9 +838,27 @@ function topbar(){
         <div style="width:34px;height:34px;border-radius:50%;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:800;font-size:13px;">${initial}</div>
         <span class="pill">${state.role==='admin'?'Signed in as Admin':'Signed in as Demo Student'}</span>
       </div>
-      <button class="btn ghost small" onclick="go('landing')">Exit prototype</button>` : `<span class="pill">Prototype build — sample data</span>`}
+      <button class="btn ghost small" onclick="signOut()">Sign Out</button>` : `<span class="pill">Prototype build — sample data</span>`}
     </div>
   </div>`;
+}
+function signOut(){
+  state.role = null;
+  state.studentTab = 'dashboard';
+  state.adminTab = 'overview';
+  state.currentCourseId = null;
+  state.currentModuleId = null;
+  state.quizAnswers = {};
+  state.quizResult = null;
+  state.draftCourse = null;
+  state.editingCourseId = null;
+  state.newStudentDraft = null;
+  state.viewStudentId = null;
+  state.courseDetailEditIndex = null;
+  state.tempModule = null;
+  state.viewCertId = null;
+  state.completionModal = null;
+  go('landing');
 }
 
 /* =========================================================
@@ -838,7 +885,7 @@ function renderLanding(){
       </div>
     </div>
     <div class="landing-footer-row">
-      Not enrolled yet? <a onclick="go('register')" style="cursor:pointer">Submit a registration request</a> — no login required.
+      Not enrolled yet? <a onclick="openRegister()" style="cursor:pointer">Submit a registration request</a> — no login required.
     </div>
   </div>`;
 }
@@ -866,7 +913,14 @@ function role_Student(){ return {role:'student'}; }
 /* =========================================================
    RENDER: REGISTRATION FORM (public)
    ========================================================= */
+function openRegister(){
+  state.registerDraft = { name:'', email:'', phone:'', course: COURSES.filter(c=>c.status==='published')[0]?.id || '', ref:'' };
+  go('register');
+}
+function updateRegisterField(field, value){ state.registerDraft[field] = value; }
+
 function renderRegister(){
+  const d = state.registerDraft || { name:'', email:'', phone:'', course:'', ref:'' };
   return `
   <div class="landing" style="padding-top:64px;">
     <button class="btn ghost small" style="margin-bottom:26px" onclick="go('landing')">&larr; Back</button>
@@ -874,20 +928,36 @@ function renderRegister(){
     <h1 style="font-size:32px;max-width:none;">Request Training Access</h1>
     <p class="lede">Submit your details below. An administrator will review your request and email your login credentials once approved.</p>
     <div class="form-wrap">
-      <div class="field"><label>Full name</label><input placeholder="e.g. Ada Nwosu" /></div>
-      <div class="field"><label>Email address</label><input placeholder="you@example.com" /></div>
-      <div class="field"><label>Phone number</label><input placeholder="080X XXX XXXX" /></div>
+      <div class="field"><label>Full name</label><input placeholder="e.g. Ada Nwosu" value="${d.name}" oninput="updateRegisterField('name',this.value)" /></div>
+      <div class="field"><label>Email address</label><input placeholder="you@example.com" value="${d.email}" oninput="updateRegisterField('email',this.value)" /></div>
+      <div class="field"><label>Phone number</label><input placeholder="080X XXX XXXX" value="${d.phone}" oninput="updateRegisterField('phone',this.value)" /></div>
       <div class="field"><label>Course of interest</label>
-        <select>${COURSES.map(c=>`<option>${c.title}</option>`).join('')}</select>
+        <select onchange="updateRegisterField('course',this.value)">${COURSES.filter(c=>c.status==='published').map(c=>`<option value="${c.id}" ${d.course===c.id?'selected':''}>${c.title}</option>`).join('')}</select>
       </div>
-      <div class="field"><label>Payment reference / evidence</label><input placeholder="Transaction reference or upload note" /></div>
+      <div class="field"><label>Payment reference / evidence</label><input placeholder="Transaction reference or upload note" value="${d.ref}" oninput="updateRegisterField('ref',this.value)" /></div>
       <button class="btn gold" style="width:100%" onclick="withLoading(this,function(){submitRegistration()},700)" data-loading-text="Submitting…">Submit Request</button>
       <p class="helper">Requests are reviewed by an administrator. You'll receive an email with your login details once approved, or a reason if declined.</p>
     </div>
   </div>`;
 }
 function submitRegistration(){
+  const d = state.registerDraft;
+  if(!d.name.trim() || !d.email.trim() || !d.phone.trim()){
+    toast('Please fill in your name, email and phone number');
+    return;
+  }
+  const email = d.email.trim().toLowerCase();
+  const hasPending = state.registrations.some(r => r.email.trim().toLowerCase() === email && r.status === 'pending');
+  if(hasPending){
+    toast('A pending request already exists for this email address');
+    return;
+  }
+  state.registrations.unshift({
+    id:'r'+Date.now(), name:d.name, email:d.email, phone:d.phone,
+    interest:d.course, status:'pending', date:new Date().toISOString().slice(0,10)
+  });
   toast("Request submitted — pending admin review");
+  state.registerDraft = null;
   go('landing');
 }
 
@@ -998,11 +1068,13 @@ function renderStudentDashboard(){
 
     <div class="section-block">
       <h3>Explore Courses</h3>
-      <p class="subtitle" style="margin-bottom:14px">More courses you might like to enroll in.</p>
+      <p class="subtitle" style="margin-bottom:14px">More courses you might like to enroll in — requests are reviewed by an administrator before access is granted.</p>
       ${(() => {
         const explore = COURSES.filter(c => c.status === 'published' && !assignedCourseIds(DEMO_STUDENT_ID).includes(c.id));
         if(!explore.length) return `<div class="empty" style="border:1px solid var(--line);background:var(--paper-raised)">You're enrolled in everything available right now.</div>`;
-        return explore.map(c => `
+        return explore.map(c => {
+          const pending = state.registrations.find(r=>r.existingStudentId===DEMO_STUDENT_ID && r.interest===c.id && r.status==='pending');
+          return `
           <div class="explore-card">
             <div class="explore-thumb" style="background:linear-gradient(135deg, ${c.color}, ${c.color}99)">▶</div>
             <div class="explore-info">
@@ -1012,10 +1084,12 @@ function renderStudentDashboard(){
             </div>
             <div class="explore-side">
               <div class="explore-price">${formatPrice(c.price)}</div>
-              <button class="btn gold small" data-loading-text="Processing…" onclick="withLoading(this,function(){enrollInCourse('${c.id}')},700)">Enroll</button>
+              ${pending
+                ? `<button class="btn ghost small" disabled>Requested</button>`
+                : `<button class="btn gold small" data-loading-text="Sending…" onclick="withLoading(this,function(){enrollInCourse('${c.id}')},600)">Enroll</button>`}
             </div>
-          </div>
-        `).join('');
+          </div>`;
+        }).join('');
       })()}
     </div>
     `;
@@ -1053,11 +1127,22 @@ function renderCourseView(){
   </div></div>`;
 }
 
+function shuffle(arr){
+  const a = [...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
 function openModule(courseId, moduleId){
   const ms = moduleState(courseId, moduleId);
   if(ms.locked){ toast("This module is locked — finish the previous one first."); return; }
+  const course = COURSES.find(c=>c.id===courseId);
+  const module = course.modules.find(m=>m.id===moduleId);
   state.videoLoading = true;
-  go('moduleView', {currentCourseId:courseId, currentModuleId:moduleId, quizResult:null, quizAnswers:{}});
+  go('moduleView', {currentCourseId:courseId, currentModuleId:moduleId, quizResult:null, quizAnswers:{}, quizOrder: shuffle(module.questions.map((_,i)=>i)), showQuizReview:false});
   setTimeout(()=>{ state.videoLoading = false; render(); }, 650);
 }
 
@@ -1078,7 +1163,13 @@ function renderModuleView(){
       <div><div class="result-score">${r.score}%</div><div class="result-label">${r.pass ? 'Passed — module complete' : `Needs ${module.passThresholdDisplay||70}% to pass`}</div></div>
       ${r.pass ? '' : `<button class="btn" onclick="withLoading(this,function(){retryQuiz()})">Retry Test</button>`}
     </div>
-    ${r.pass ? `<button class="btn secondary" onclick="go('courseView',{currentCourseId:'${course.id}'})">Back to course</button>` : renderQuizForm(module, true)}
+    ${r.pass ? `
+      <div class="row-actions" style="margin-bottom:18px">
+        <button class="btn ghost small" onclick="toggleQuizReview()">${state.showQuizReview ? 'Hide Answers' : 'Review Answers'}</button>
+        <button class="btn secondary small" onclick="go('courseView',{currentCourseId:'${course.id}'})">Back to course</button>
+      </div>
+      ${state.showQuizReview ? renderQuizReview(r.review) : ''}
+    ` : renderQuizForm(module, true)}
     `;
   } else {
     testBlock = renderQuizForm(module, false);
@@ -1115,20 +1206,43 @@ function renderModuleView(){
 }
 
 function renderQuizForm(module, isRetry){
+  const order = (state.quizOrder && state.quizOrder.length === module.questions.length) ? state.quizOrder : module.questions.map((_,i)=>i);
   return `
-  ${module.questions.map((q,i)=>`
+  ${order.map((qi,displayIdx)=>{
+    const q = module.questions[qi];
+    return `
     <div class="q-block">
-      <div class="q-num">Question ${i+1} of ${module.questions.length}</div>
+      <div class="q-num">Question ${displayIdx+1} of ${order.length}</div>
       <div class="q-text">${q.q}</div>
       ${q.options.map((o,oi)=>`
         <label class="opt">
-          <input type="radio" name="q${i}" value="${oi}" onchange="setAnswer('${module.id}',${i},${oi})">
+          <input type="radio" name="q${qi}" value="${oi}" onchange="setAnswer('${module.id}',${qi},${oi})">
           ${o}
         </label>`).join('')}
     </div>
-  `).join('')}
+  `;
+  }).join('')}
   <button class="btn gold" onclick="withLoading(this,function(){submitQuiz('${module.id}')},700)" data-loading-text="Grading…">${isRetry ? 'Submit Retry' : 'Submit Test'}</button>
   `;
+}
+
+function renderQuizReview(review){
+  return `<div class="quiz-review">${review.map((item,idx)=>`
+    <div class="q-block">
+      <div class="q-num">Question ${idx+1}</div>
+      <div class="q-text">${item.text}</div>
+      ${item.options.map((o,oi)=>{
+        let cls = '';
+        if(oi === item.correctIndex) cls = 'correct';
+        else if(oi === item.selected && !item.isCorrect) cls = 'wrong';
+        return `<div class="opt ${cls}" style="cursor:default">${o}${oi===item.selected ? ' — your answer' : ''}</div>`;
+      }).join('')}
+    </div>
+  `).join('')}</div>`;
+}
+function toggleQuizReview(){
+  state.showQuizReview = !state.showQuizReview;
+  render();
 }
 
 function markWatched(moduleId){
@@ -1146,7 +1260,12 @@ function submitQuiz(moduleId){
   const module = course.modules.find(m=>m.id===moduleId);
   const total = module.questions.length;
   let correct = 0;
-  module.questions.forEach((q,i)=>{ if(state.quizAnswers[i] === q.correct) correct++; });
+  const review = module.questions.map((q,i)=>{
+    const selected = state.quizAnswers[i];
+    const isCorrect = selected === q.correct;
+    if(isCorrect) correct++;
+    return { text:q.q, options:q.options, selected, correctIndex:q.correct, isCorrect };
+  });
   const score = Math.round((correct/total)*100);
   const pass = score >= 70;
   const prev = state.progress[moduleId] || {};
@@ -1155,26 +1274,31 @@ function submitQuiz(moduleId){
     completed: pass || prev.completed || false,
     bestScore: Math.max(score, prev.bestScore || 0)
   };
-  state.quizResult = {score, pass};
+  state.quizResult = {score, pass, review};
   render();
   if(pass) maybeIssueCertificate(course);
 }
 
 function retryQuiz(){
+  const course = COURSES.find(c=>c.id===state.currentCourseId);
+  const module = course.modules.find(m=>m.id===state.currentModuleId);
   state.quizResult = null;
   state.quizAnswers = {};
+  state.quizOrder = shuffle(module.questions.map((_,i)=>i));
+  state.showQuizReview = false;
   render();
 }
 
 /* ---------- Certificate view ---------- */
 function renderCertificateView(){
   const cert = state.certificates.find(c=>c.id===state.viewCertId);
+  const revoked = cert && cert.status === 'revoked';
   return `${topbar()}<div class="shell">${studentSidebar('certificates')}
   <div class="content">
     <a class="back-link" onclick="go('studentDashboard',{studentTab:'certificates'})" style="cursor:pointer">&larr; My Certificates</a>
     <h2>Certificate</h2>
-    <p class="subtitle">Issued automatically on course completion. Downloadable as PDF; verifiable via public link.</p>
-    <div class="cert-wrap">
+    <p class="subtitle">${revoked ? 'This certificate is no longer valid.' : 'Issued automatically on course completion. Downloadable as PDF; verifiable via public link.'}</p>
+    <div class="cert-wrap" style="${revoked ? 'opacity:.55;filter:grayscale(.4)' : ''}">
       <div class="cert-org">1ST ROYAL CHARACTER &amp; VALUES LIMITED</div>
       <div class="cert-heading">This certifies that</div>
       <div class="cert-name">${cert.student}</div>
@@ -1185,8 +1309,10 @@ function renderCertificateView(){
       </div>
     </div>
     <div style="display:flex;gap:10px;justify-content:center;margin-top:26px;max-width:680px">
-      <button class="btn gold" onclick="withLoading(this,function(){toast('Certificate downloaded')},600)" data-loading-text="Preparing PDF…">Download PDF</button>
-      <button class="btn ghost" onclick="toast('Public verification page (mock): /verify/${cert.certNo}')">View verification link</button>
+      ${revoked
+        ? `<div class="result-banner fail" style="max-width:420px"><div><div class="result-label" style="font-size:14px;font-weight:600;color:var(--rust)">Certificate Revoked</div><div class="result-label" style="margin-top:4px">This certificate is no longer downloadable. Contact an administrator if you believe this is an error.</div></div></div>`
+        : `<button class="btn gold" onclick="withLoading(this,function(){toast('Certificate downloaded')},600)" data-loading-text="Preparing PDF…">Download PDF</button>
+           <button class="btn ghost" onclick="toast('Public verification page (mock): /verify/${cert.certNo}')">View verification link</button>`}
     </div>
   </div></div>`;
 }
@@ -1227,15 +1353,24 @@ function renderAdminDashboard(){
 function adminOverview(){
   const pending = state.registrations.filter(r=>r.status==='pending').length;
   const activeStudents = state.students.filter(s=>s.status==='active').length;
-  const completions = state.certificates.length;
+  const now = new Date();
+  const completionsThisMonth = state.certificates.filter(c=>{
+    const d = new Date(c.date);
+    return d.getFullYear()===now.getFullYear() && d.getMonth()===now.getMonth();
+  }).length;
+  const coursesInProgress = COURSES.filter(c=>{
+    const assignedStudentIds = Object.keys(state.assignments).filter(sid=>state.assignments[sid].includes(c.id));
+    return assignedStudentIds.some(sid=>!studentCourseComplete(sid, c));
+  }).length;
   return `
   <h2>Overview</h2>
   <p class="subtitle">Snapshot of training activity across the organization.</p>
-  <div class="kpi-row">
+  <div class="kpi-row kpi-row-5">
     <div class="kpi" style="--i:0"><div class="kpi-value" data-target="${state.students.length}">0</div><div class="kpi-label">Total students</div></div>
     <div class="kpi" style="--i:1"><div class="kpi-value" data-target="${activeStudents}">0</div><div class="kpi-label">Active students</div></div>
-    <div class="kpi" style="--i:2"><div class="kpi-value" data-target="${completions}">0</div><div class="kpi-label">Completions this month</div></div>
-    <div class="kpi" style="--i:3"><div class="kpi-value" data-target="${pending}">0</div><div class="kpi-label">Pending requests</div></div>
+    <div class="kpi" style="--i:2"><div class="kpi-value" data-target="${coursesInProgress}">0</div><div class="kpi-label">Courses in progress</div></div>
+    <div class="kpi" style="--i:3"><div class="kpi-value" data-target="${completionsThisMonth}">0</div><div class="kpi-label">Completions this month</div></div>
+    <div class="kpi" style="--i:4"><div class="kpi-value" data-target="${pending}">0</div><div class="kpi-label">Pending requests</div></div>
   </div>
   <div class="section-block">
     <h3>Recent Registration Requests</h3>
@@ -1251,12 +1386,14 @@ function adminOverview(){
 function adminRegistrations(){
   return `
   <h2>Registration Requests</h2>
-  <p class="subtitle">Approve to auto-create a student account and send credentials by email, or reject with a reason.</p>
+  <p class="subtitle">Approve a new registration to create a student account, or approve an existing student's course request to grant access. Reject with a reason either way.</p>
   <div class="table-wrap"><table>
-    <tr><th>Name</th><th>Email</th><th>Course</th><th>Date</th><th>Status</th><th></th></tr>
+    <tr><th>Name</th><th>Type</th><th>Email</th><th>Course</th><th>Date</th><th>Status</th><th></th></tr>
     ${state.registrations.map(r=>`
       <tr>
-        <td>${r.name}</td><td>${r.email}</td><td>${COURSES.find(c=>c.id===r.interest)?.title || '—'}</td><td>${r.date}</td>
+        <td>${r.name}</td>
+        <td>${r.existingStudentId ? '<span class="badge active">course request</span>' : '<span class="badge draft">new registration</span>'}</td>
+        <td>${r.email}</td><td>${COURSES.find(c=>c.id===r.interest)?.title || '—'}</td><td>${r.date}</td>
         <td><span class="badge ${r.status}">${r.status}</span></td>
         <td class="row-actions">
           ${r.status==='pending' ? `
@@ -1273,8 +1410,15 @@ function actOnRegistration(id, status){
   const r = state.registrations.find(x=>x.id===id);
   r.status = status;
   if(status==='approved'){
-    state.students.push({id:'s'+Date.now(), name:r.name, email:r.email, status:'active', lastActive:'Just now'});
-    toast(`${r.name} approved — welcome email sent`);
+    if(r.existingStudentId){
+      const arr = state.assignments[r.existingStudentId] = state.assignments[r.existingStudentId] || [];
+      if(!arr.includes(r.interest)) arr.push(r.interest);
+      const course = COURSES.find(c=>c.id===r.interest);
+      toast(`Course access granted — ${r.name} notified by email`);
+    } else {
+      state.students.push({id:'s'+Date.now(), name:r.name, email:r.email, status:'active', lastActive:'Just now'});
+      toast(`${r.name} approved — welcome email sent`);
+    }
   } else {
     toast(`${r.name}'s request rejected`);
   }
@@ -1306,6 +1450,29 @@ function toggleStudentStatus(id){
   const s = state.students.find(x=>x.id===id);
   s.status = s.status === 'active' ? 'inactive' : 'active';
   toast(`${s.name} ${s.status === 'active' ? 'activated' : 'deactivated'}`);
+  render();
+}
+
+function startEditStudent(id){
+  const s = state.students.find(x=>x.id===id);
+  state.editingStudentDetails = true;
+  state.studentEditDraft = { name:s.name, email:s.email, phone:s.phone||'' };
+  render();
+}
+function updateStudentEditField(field, value){ state.studentEditDraft[field] = value; }
+function cancelStudentEdit(){
+  state.editingStudentDetails = false;
+  state.studentEditDraft = null;
+  render();
+}
+function saveStudentEdit(id){
+  const d = state.studentEditDraft;
+  if(!d.name.trim() || !d.email.trim()){ toast('Name and email are required'); return; }
+  const s = state.students.find(x=>x.id===id);
+  s.name = d.name; s.email = d.email; s.phone = d.phone;
+  state.editingStudentDetails = false;
+  state.studentEditDraft = null;
+  toast('Student details updated');
   render();
 }
 
@@ -1370,6 +1537,8 @@ function createStudent(){
 function renderAdminStudentDetail(){
   const s = state.students.find(x=>x.id===state.viewStudentId);
   const assigned = assignedCourseIds(s.id);
+  const editing = state.editingStudentDetails;
+  const d = state.studentEditDraft || {};
   return `${topbar()}<div class="shell">${adminSidebar('students')}
   <div class="content">
     <a class="back-link" onclick="go('adminDashboard',{adminTab:'students'})" style="cursor:pointer">&larr; Students</a>
@@ -1377,14 +1546,27 @@ function renderAdminStudentDetail(){
     <p class="subtitle">${s.email}</p>
 
     <div class="profile-card">
+      ${editing ? `
+      <div style="flex:1;display:flex;flex-direction:column;gap:12px;max-width:420px">
+        <div class="field" style="margin-bottom:0"><label>Full name</label><input value="${d.name}" oninput="updateStudentEditField('name',this.value)" /></div>
+        <div class="field" style="margin-bottom:0"><label>Email address</label><input value="${d.email}" oninput="updateStudentEditField('email',this.value)" /></div>
+        <div class="field" style="margin-bottom:0"><label>Phone number</label><input value="${d.phone}" oninput="updateStudentEditField('phone',this.value)" /></div>
+      </div>
+      <div class="profile-actions">
+        <button class="btn small gold" onclick="withLoading(this,function(){saveStudentEdit('${s.id}')},500)" data-loading-text="Saving…">Save</button>
+        <button class="btn small ghost" onclick="cancelStudentEdit()">Cancel</button>
+      </div>
+      ` : `
       <div>
         <div class="profile-name">${s.name}</div>
         <div class="profile-meta">Status: <span class="badge ${s.status}">${s.status}</span> · Last active ${s.lastActive}</div>
       </div>
       <div class="profile-actions">
+        <button class="btn small ghost" onclick="startEditStudent('${s.id}')">Edit details</button>
         <button class="btn small ghost" onclick="toggleStudentStatus('${s.id}');go('adminStudentDetail',{viewStudentId:'${s.id}'})">${s.status==='active'?'Deactivate':'Activate'}</button>
         <button class="btn small ghost" onclick="toast('Password reset link sent to ${s.email}')">Reset password</button>
       </div>
+      `}
     </div>
 
     <div class="section-block">
@@ -1681,6 +1863,10 @@ function renderAdminCourseDetail(){
         const hasProgress = !!state.progress[m.id];
         return `
         <div class="module-row">
+          <div class="reorder-col">
+            <button class="reorder-btn" ${i===0?'disabled':''} onclick="moveModule('${course.id}',${i},-1)" title="Move up">▲</button>
+            <button class="reorder-btn" ${i===course.modules.length-1?'disabled':''} onclick="moveModule('${course.id}',${i},1)" title="Move down">▼</button>
+          </div>
           <div class="module-num">${i+1}</div>
           <div class="module-info">
             <div class="mtitle">${m.title} ${m.isActive===false ? '<span class="badge draft" style="margin-left:6px">Inactive</span>' : ''}</div>
@@ -1768,6 +1954,16 @@ function deleteModule(courseId, index){
   }
   course.modules.splice(index,1);
   toast(`"${m.title}" deleted`);
+  render();
+}
+
+function moveModule(courseId, index, direction){
+  const course = COURSES.find(c=>c.id===courseId);
+  const target = index + direction;
+  if(target < 0 || target >= course.modules.length) return;
+  const modules = course.modules;
+  [modules[index], modules[target]] = [modules[target], modules[index]];
+  toast('Module order updated');
   render();
 }
 
